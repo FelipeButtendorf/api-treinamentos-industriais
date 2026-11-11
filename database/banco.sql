@@ -1,0 +1,25 @@
+CREATE DATABASE banco;
+
+USE banco;
+
+CREATE TABLE treinamento(
+id_treinamento INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100) NOT NULL,
+carga_horaria INT NOT NULL,
+modalidade VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE instrutor(
+id_instrutor INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100) NOT NULL,
+especialidade VARCHAR(50) NOT NULL,
+email VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE sala(
+id_sala INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100) NOT NULL,
+capacidade INT NOT NULL,
+localizacao TEXT NOT NULL
+);
+
