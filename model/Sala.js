@@ -7,7 +7,7 @@ export class Sala {
     }
 
     validar() {
-        if (!this.nome || this.nome.trim().length < 2) {
+        if (!this.nome || this.nome.trim().length < 3) {
             throw new Error('O nome da sala deve ter pelo menos 3 caracteres.');
         }
 

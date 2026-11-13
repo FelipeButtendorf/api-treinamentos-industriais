@@ -10,6 +10,8 @@ export  async function cadastrarTreinamento(req, res) {
     }
     const treinamento = new Treinamento(nome, carga_horaria, modalidade);
 
+    treinamento.validar();
+
     const id = await cadastrar(treinamento);
 
     res.status(201).json({mensagem: 'Treinamento cadastrado com sucesso!', id_treinamento: id});
@@ -64,7 +66,11 @@ export async function atualizarTreinamento(req, res) {
         treinamento.modalidade = modalidade;
     }
 
-    const resultado = await atualizar(id, treinamento);
+    const treinamentoAtualizado = new Treinamento(treinamento.nome, treinamento.carga_horaria, treinamento.modalidade);
+
+    treinamentoAtualizado.validar();
+
+    const resultado = await atualizar(id, treinamentoAtualizado);
 
     if(resultado === 0) {
         return res.status(500).json({mensagem: 'Nenhum treinamento atualizado!'});

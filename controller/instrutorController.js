@@ -10,6 +10,8 @@ export  async function cadastrarInstrutor(req, res) {
     }
     const instrutor = new Instrutor(nome, especialidade, email);
 
+    instrutor.validar();
+
     const id = await cadastrar(instrutor);
 
     res.status(201).json({mensagem: 'Instrutor cadastrado com sucesso!', id_instrutor: id});
@@ -64,7 +66,10 @@ export async function atualizarInstrutor(req, res) {
         instrutor.email = email;
     }
 
-    const resultado = await atualizar(id, instrutor);
+    const instrutorAtualizado = new Instrutor(instrutor.nome, instrutor.especialidade, instrutor.email);
+    instrutorAtualizado.validar();
+
+    const resultado = await atualizar(id, instrutorAtualizado);
 
     if(resultado === 0) {
         return res.status(500).json({mensagem: 'Nenhum instrutor atualizado!'});

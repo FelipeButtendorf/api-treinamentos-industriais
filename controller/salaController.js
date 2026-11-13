@@ -10,6 +10,8 @@ export  async function cadastrarSala(req, res) {
     }
     const sala = new Sala(nome, capacidade, localizacao);
 
+    sala.validar();
+
     const id = await cadastrar(sala);
 
     res.status(201).json({mensagem: 'Sala cadastrada com sucesso!', id_sala: id});
@@ -64,7 +66,11 @@ export async function atualizarSala(req, res) {
         sala.localizacao = localizacao;
     }
 
-    const resultado = await atualizar(id, sala);
+    const salaAtualizada = new Sala(sala.nome, sala.capacidade, sala.localizacao);
+
+    salaAtualizada.validar();
+
+    const resultado = await atualizar(id, salaAtualizada);
 
     if(resultado === 0) {
         return res.status(500).json({mensagem: 'Nenhuma sala atualizada!'});
